@@ -34,7 +34,7 @@ export default function Navbar() {
     {/* INNER CONTAINER (controls width) */}
     <div
       className="
-        max-w-5xl mx-auto
+        max-w-3xl mx-auto
         flex items-center justify-between
         px-6 py-3
         bg-black/40 backdrop-blur-xl
