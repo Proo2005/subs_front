@@ -1,5 +1,7 @@
 @import "tailwindcss";
-
+.bg-glass {
+  @apply bg-black/40 backdrop-blur-lg;
+}
 :root {
   --background: #ffffff;
   --foreground: #171717;
