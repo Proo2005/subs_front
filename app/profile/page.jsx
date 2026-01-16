@@ -23,7 +23,7 @@ export default function ProfilePage() {
     setLoading(true);
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.get("http://localhost:5000/api/subscriptions", {
+      const res = await axios.get("https://subs-back.onrender.com/api/subscriptions", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setSubscriptions(res.data);

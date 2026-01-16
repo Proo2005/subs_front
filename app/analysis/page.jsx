@@ -46,7 +46,7 @@ export default function Analysis() {
     setLoading(true);
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.get("http://localhost:5000/api/subscriptions", {
+      const res = await axios.get("https://subs-back.onrender.com/api/subscriptions", {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -123,7 +123,7 @@ export default function Analysis() {
   const handleRenew = async (id) => {
     try {
       const token = localStorage.getItem("token");
-      await axios.put(`http://localhost:5000/api/subscriptions/${id}/renew`, {}, {
+      await axios.put(`https://subs-back.onrender.com/api/subscriptions/${id}/renew`, {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
       fetchSubs();
@@ -137,7 +137,7 @@ export default function Analysis() {
     if (!confirm("Stop this subscription? This cannot be undone.")) return;
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:5000/api/subscriptions/${id}`, {
+      await axios.delete(`https://subs-back.onrender.com/api/subscriptions/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       fetchSubs();

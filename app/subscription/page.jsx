@@ -39,7 +39,7 @@ export default function Subscriptions() {
         startDate: form.startDate ? form.startDate.toISOString() : null,
       };
 
-      await axios.post("http://localhost:5000/api/subscriptions", payload, {
+      await axios.post("https://subs-back.onrender.com/api/subscriptions", payload, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
