@@ -53,7 +53,7 @@ export default function Navbar() {
           </Link>
         ))}
 
-        {/* PROFILE */}
+        {/* PROFILE / AUTH */}
         {!user ? (
           <div className="flex gap-4">
             <Link href="/login" className="text-white hover:text-neon transition-colors">
@@ -106,46 +106,53 @@ export default function Navbar() {
       {/* MOBILE MENU */}
       {openMobile && (
         <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-4 w-[90%] bg-black/80 backdrop-blur-lg border border-white/10 rounded-2xl shadow-xl flex flex-col gap-4 p-6 md:hidden z-40 animate-slideDown">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="text-white text-lg hover:text-neon transition-colors"
-              onClick={() => setOpenMobile(false)}
-            >
-              {link.name}
-            </Link>
-          ))}
 
+          {/* Nav Links */}
+          <div className="flex flex-col gap-3">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-white text-lg hover:text-neon transition-colors"
+                onClick={() => setOpenMobile(false)}
+              >
+                {link.name}
+              </Link>
+            ))}
+          </div>
+
+          <hr className="border-white/20 my-3" />
+
+          {/* Auth Buttons / Profile */}
           {!user ? (
-            <div className="flex flex-col gap-3 mt-3">
+            <div className="flex flex-col gap-3">
               <Link
                 href="/login"
-                className="text-white text-lg hover:text-neon transition-colors"
+                className="w-full text-center bg-transparent border border-white/20 py-2 rounded-lg text-white hover:text-neon transition"
                 onClick={() => setOpenMobile(false)}
               >
                 Login
               </Link>
               <Link
                 href="/register"
-                className="bg-neon px-4 py-2 rounded-lg font-semibold text-center hover:opacity-90 transition-all"
+                className="w-full text-center bg-neon py-2 rounded-lg font-semibold hover:brightness-110 transition"
                 onClick={() => setOpenMobile(false)}
               >
                 Signup
               </Link>
             </div>
           ) : (
-            <div className="flex flex-col gap-3 mt-3">
+            <div className="flex flex-col gap-3">
               <Link
                 href="/profile"
-                className="text-white hover:text-neon transition-colors"
+                className="w-full text-center bg-transparent border border-white/20 py-2 rounded-lg text-white hover:text-neon transition"
                 onClick={() => setOpenMobile(false)}
               >
                 Profile
               </Link>
               <button
                 onClick={() => { handleLogout(); setOpenMobile(false); }}
-                className="text-red-400 hover:text-red-500 transition-colors text-left"
+                className="w-full text-center bg-red-500 py-2 rounded-lg text-white hover:brightness-110 transition"
               >
                 Logout
               </button>
