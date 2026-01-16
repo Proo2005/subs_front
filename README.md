@@ -1,5 +1,10 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+[Backend](https://github.com/Proo2005/subs_back)  
+[Vercel](https://subs-front.vercel.app/)  
+[Render](https://subs-back.onrender.com)
+
+
 ## Getting Started
 
 First, run the development server:
