@@ -146,8 +146,7 @@ export default function Subscriptions() {
         </form>
       </div>
 
-      {/* Footer */}
-      <Footer />
+     
     </div>
   );
 }
