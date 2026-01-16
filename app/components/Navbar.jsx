@@ -41,60 +41,85 @@ export default function Navbar() {
         SubTrack
       </Link>
 
-      {/* DESKTOP LINKS */}
-      <div className="hidden md:flex items-center gap-6">
-        {navLinks.map((link) => (
-          <Link
-            key={link.href}
-            href={link.href}
-            className="text-white hover:text-neon transition-colors"
-          >
-            {link.name}
-          </Link>
-        ))}
+      {/* DESKTOP DROPDOWN */}
+      <div className="hidden md:block relative">
+        <button
+          onClick={() => setOpenProfile(!openProfile)}
+          className="flex items-center gap-2 px-5 py-2 rounded-xl 
+               bg-black/40 backdrop-blur-md border border-white/20 
+               text-white hover:text-neon transition"
+        >
+          <span className="font-medium">
+            {user ? user.name : "Menu"}
+          </span>
+          <span className="text-sm">▾</span>
+        </button>
 
-        {/* PROFILE / AUTH */}
-        {!user ? (
-          <div className="flex gap-4">
-            <Link href="/login" className="text-white hover:text-neon transition-colors">
-              Login
-            </Link>
-            <Link
-              href="/register"
-              className="bg-neon px-4 py-2 rounded-lg font-semibold hover:opacity-90 transition-all"
-            >
-              Signup
-            </Link>
-          </div>
-        ) : (
-          <div className="relative">
-            <button
-              onClick={() => setOpenProfile(!openProfile)}
-              className="flex items-center gap-2 text-white hover:text-neon transition-colors"
-            >
-              <span className="font-medium">{user.name}</span>
-              <span className="text-sm">▾</span>
-            </button>
+        {openProfile && (
+          <div className="absolute right-0 mt-4 w-52 
+                    bg-black/80 backdrop-blur-xl 
+                    border border-white/10 
+                    rounded-2xl shadow-2xl 
+                    overflow-hidden">
 
-            {openProfile && (
-              <div className="absolute right-0 mt-3 w-44 bg-black/70 backdrop-blur-md border border-white/10 rounded-xl shadow-lg overflow-hidden">
+            {/* NAV LINKS */}
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setOpenProfile(false)}
+                className="block px-5 py-3 text-white 
+                     hover:bg-white/5 hover:text-neon transition"
+              >
+                {link.name}
+              </Link>
+            ))}
+
+            <div className="border-t border-white/10" />
+
+            {/* AUTH SECTION */}
+            {!user ? (
+              <>
+                <Link
+                  href="/login"
+                  onClick={() => setOpenProfile(false)}
+                  className="block px-5 py-3 text-white hover:bg-white/5 transition"
+                >
+                  Login
+                </Link>
+                <Link
+                  href="/register"
+                  onClick={() => setOpenProfile(false)}
+                  className="block px-5 py-3 text-neon font-semibold hover:bg-white/5 transition"
+                >
+                  Signup
+                </Link>
+              </>
+            ) : (
+              <>
                 <Link
                   href="/profile"
-                  className="block px-4 py-3 hover:bg-white/5 transition-colors"
+                  onClick={() => setOpenProfile(false)}
+                  className="block px-5 py-3 text-white hover:bg-white/5 transition"
                 >
                   Profile
                 </Link>
                 <button
-                  onClick={handleLogout}
-                  className="w-full text-left px-4 py-3 text-red-400 hover:bg-white/5 transition-colors"
+                  onClick={() => {
+                    handleLogout();
+                    setOpenProfile(false);
+                  }}
+                  className="w-full text-left px-5 py-3 
+                       text-red-400 hover:bg-white/5 transition"
                 >
                   Logout
                 </button>
-              </div>
+              </>
             )}
           </div>
         )}
       </div>
+
 
       {/* MOBILE HAMBURGER */}
       <div className="md:hidden flex items-center gap-4">
