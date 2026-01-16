@@ -30,14 +30,21 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="fixed top-4 left-1/2 transform -translate-x-1/2 
-                    w-[95%] md:w-[90%] lg:w-[80%] xl:w-[70%] z-50 
-                    flex items-center justify-between px-6 md:px-8 py-4 
-                    bg-black/30 backdrop-blur-xl border border-white/10 
-                    rounded-3xl shadow-2xl transition-all">
-
+  <nav className="fixed top-5 left-1/2 -translate-x-1/2 z-50 w-full px-4">
+    {/* INNER CONTAINER (controls width) */}
+    <div
+      className="
+        max-w-5xl mx-auto
+        flex items-center justify-between
+        px-6 py-3
+        bg-black/40 backdrop-blur-xl
+        border border-white/10
+        rounded-2xl shadow-2xl
+        transition-all
+      "
+    >
       {/* LOGO */}
-      <Link href="/" className="text-2xl font-bold text-neon">
+      <Link href="/" className="text-xl font-bold text-neon">
         SubTrack
       </Link>
 
@@ -45,9 +52,15 @@ export default function Navbar() {
       <div className="hidden md:block relative">
         <button
           onClick={() => setOpenProfile(!openProfile)}
-          className="flex items-center gap-2 px-5 py-2 rounded-xl 
-               bg-black/40 backdrop-blur-md border border-white/20 
-               text-white hover:text-neon transition"
+          className="
+            flex items-center gap-2
+            px-4 py-2
+            rounded-xl
+            bg-black/50 backdrop-blur-md
+            border border-white/20
+            text-white hover:text-neon
+            transition
+          "
         >
           <span className="font-medium">
             {user ? user.name : "Menu"}
@@ -56,20 +69,27 @@ export default function Navbar() {
         </button>
 
         {openProfile && (
-          <div className="absolute right-0 mt-4 w-52 
-                    bg-black/80 backdrop-blur-xl 
-                    border border-white/10 
-                    rounded-2xl shadow-2xl 
-                    overflow-hidden">
-
+          <div
+            className="
+              absolute right-0 mt-3 w-52
+              bg-black/80 backdrop-blur-xl
+              border border-white/10
+              rounded-2xl shadow-2xl
+              overflow-hidden
+            "
+          >
             {/* NAV LINKS */}
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpenProfile(false)}
-                className="block px-5 py-3 text-white 
-                     hover:bg-white/5 hover:text-neon transition"
+                className="
+                  block px-5 py-3
+                  text-white
+                  hover:bg-white/5 hover:text-neon
+                  transition
+                "
               >
                 {link.name}
               </Link>
@@ -77,7 +97,7 @@ export default function Navbar() {
 
             <div className="border-t border-white/10" />
 
-            {/* AUTH SECTION */}
+            {/* AUTH / PROFILE */}
             {!user ? (
               <>
                 <Link
@@ -109,8 +129,7 @@ export default function Navbar() {
                     handleLogout();
                     setOpenProfile(false);
                   }}
-                  className="w-full text-left px-5 py-3 
-                       text-red-400 hover:bg-white/5 transition"
+                  className="w-full text-left px-5 py-3 text-red-400 hover:bg-white/5 transition"
                 >
                   Logout
                 </button>
@@ -120,71 +139,87 @@ export default function Navbar() {
         )}
       </div>
 
-
       {/* MOBILE HAMBURGER */}
-      <div className="md:hidden flex items-center gap-4">
-        <button onClick={() => setOpenMobile(!openMobile)} className="text-white text-2xl">
+      <div className="md:hidden">
+        <button
+          onClick={() => setOpenMobile(!openMobile)}
+          className="text-white text-2xl"
+        >
           {openMobile ? <HiX /> : <HiMenu />}
         </button>
       </div>
+    </div>
 
-      {/* MOBILE MENU */}
-      {openMobile && (
-        <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-4 w-[90%] bg-black/80 backdrop-blur-lg border border-white/10 rounded-2xl shadow-xl flex flex-col gap-4 p-6 md:hidden z-40 animate-slideDown">
-
-          {/* Nav Links */}
-          <div className="flex flex-col gap-3">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-white text-lg hover:text-neon transition-colors"
-                onClick={() => setOpenMobile(false)}
-              >
-                {link.name}
-              </Link>
-            ))}
-          </div>
-
-          <hr className="border-white/20 my-3" />
-
-          {/* Auth Buttons / Profile */}
-          {!user ? (
-            <div className="flex flex-col gap-3">
-              <Link
-                href="/login"
-                className="w-full text-center bg-transparent border border-white/20 py-2 rounded-lg text-white hover:text-neon transition"
-                onClick={() => setOpenMobile(false)}
-              >
-                Login
-              </Link>
-              <Link
-                href="/register"
-                className="w-full text-center bg-neon py-2 rounded-lg font-semibold hover:brightness-110 transition"
-                onClick={() => setOpenMobile(false)}
-              >
-                Signup
-              </Link>
-            </div>
-          ) : (
-            <div className="flex flex-col gap-3">
-              <Link
-                href="/profile"
-                className="w-full text-center bg-transparent border border-white/20 py-2 rounded-lg text-white hover:text-neon transition"
-                onClick={() => setOpenMobile(false)}
-              >
-                Profile
-              </Link>
-              <button
-                onClick={() => { handleLogout(); setOpenMobile(false); }}
-                className="w-full text-center bg-red-500 py-2 rounded-lg text-white hover:brightness-110 transition"
-              >
-                Logout
-              </button>
-            </div>
-          )}
+    {/* MOBILE MENU */}
+    {openMobile && (
+      <div
+        className="
+          md:hidden
+          absolute top-full left-1/2 -translate-x-1/2 mt-4
+          w-[90%]
+          bg-black/80 backdrop-blur-lg
+          border border-white/10
+          rounded-2xl shadow-xl
+          p-6 z-40
+          animate-slideDown
+        "
+      >
+        {/* NAV LINKS */}
+        <div className="flex flex-col gap-3">
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="text-white text-lg hover:text-neon transition"
+              onClick={() => setOpenMobile(false)}
+            >
+              {link.name}
+            </Link>
+          ))}
         </div>
-      )}
-    </nav>
-  );
+
+        <hr className="border-white/20 my-4" />
+
+        {/* AUTH / PROFILE */}
+        {!user ? (
+          <div className="flex flex-col gap-3">
+            <Link
+              href="/login"
+              className="text-center border border-white/20 py-2 rounded-lg text-white hover:text-neon transition"
+              onClick={() => setOpenMobile(false)}
+            >
+              Login
+            </Link>
+            <Link
+              href="/register"
+              className="text-center bg-neon py-2 rounded-lg font-semibold hover:brightness-110 transition"
+              onClick={() => setOpenMobile(false)}
+            >
+              Signup
+            </Link>
+          </div>
+        ) : (
+          <div className="flex flex-col gap-3">
+            <Link
+              href="/profile"
+              className="text-center border border-white/20 py-2 rounded-lg text-white hover:text-neon transition"
+              onClick={() => setOpenMobile(false)}
+            >
+              Profile
+            </Link>
+            <button
+              onClick={() => {
+                handleLogout();
+                setOpenMobile(false);
+              }}
+              className="text-center bg-red-500 py-2 rounded-lg text-white hover:brightness-110 transition"
+            >
+              Logout
+            </button>
+          </div>
+        )}
+      </div>
+    )}
+  </nav>
+);
 }
